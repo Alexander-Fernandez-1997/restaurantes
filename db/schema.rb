@@ -10,6 +10,50 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2022_02_18_011234) do
 
+  create_table "empleados", force: :cascade do |t|
+    t.string "nombre"
+    t.integer "edad"
+    t.string "rol"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "pedidos", force: :cascade do |t|
+    t.integer "restaurante_id", null: false
+    t.integer "empleado_id", null: false
+    t.integer "platillo_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["empleado_id"], name: "index_pedidos_on_empleado_id"
+    t.index ["platillo_id"], name: "index_pedidos_on_platillo_id"
+    t.index ["restaurante_id"], name: "index_pedidos_on_restaurante_id"
+  end
+
+  create_table "platillos", force: :cascade do |t|
+    t.string "nombre"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "restaurantes", force: :cascade do |t|
+    t.string "nombre"
+    t.string "direccion"
+    t.integer "estrellas"
+    t.integer "capacidad"
+    t.string "estilo"
+    t.integer "platillo_id", null: false
+    t.integer "empleado_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["empleado_id"], name: "index_restaurantes_on_empleado_id"
+    t.index ["platillo_id"], name: "index_restaurantes_on_platillo_id"
+  end
+
+  add_foreign_key "pedidos", "empleados"
+  add_foreign_key "pedidos", "platillos"
+  add_foreign_key "pedidos", "restaurantes"
+  add_foreign_key "restaurantes", "empleados"
+  add_foreign_key "restaurantes", "platillos"
 end
