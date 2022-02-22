@@ -1,0 +1,2 @@
+class PlatillosController < ApplicationController
+end

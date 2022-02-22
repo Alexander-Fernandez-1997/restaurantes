@@ -1,3 +1,8 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+root to: "restaurantes#index"
+  resources :restaurantes, only:[:show, :edit, :update] do
+  resources :empleado, only:[:new, :create, :destroy, :edit, :update, :index]
+  resources :platillo
+  resources :pedidos
+  end
 end
