@@ -2,7 +2,7 @@ class RestaurantesController < ApplicationController
   before_action :set_restaurante, only:[:show, :edit, :update]
 
   def index
-    @restaurantes = Restaurantes.all
+    @restaurantes = Restaurante.all
   end
 
   def show
@@ -12,12 +12,13 @@ class RestaurantesController < ApplicationController
   end
 
   def update
+
     @restaurante.update(restaurantes_params)
   end
 
 private
 def set_restaurante
-  @restaurante = Restaurantes.find(params[:id])
+  @restaurante = Restaurante.find(params[:id])
 end
 
 def restaurantes_params
